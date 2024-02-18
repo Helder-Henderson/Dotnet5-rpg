@@ -12,5 +12,8 @@ namespace dotnet_rpg.Models {
         public int Defense { get; set; } = 10;
         public int Intelligence { get; set; } = 10;
         public ERpgClass Class { get; set; } = ERpgClass.Mage;
+        public User? User { get; set; }
+        public Weapon? Weapon { get; set; }
+        public List<Skill> Skills { get; set; }
     }
 }

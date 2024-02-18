@@ -1,10 +1,13 @@
+using System.Security.Claims;
 using dotnet_rpg.Dtos.Character;
 using dotnet_rpg.Models;
 using dotnet_rpg.Services.Interfaces.CharacterService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace dotnet_rpg.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("api/[controller]")]
 public class CharacterController : ControllerBase
@@ -56,6 +59,14 @@ public class CharacterController : ControllerBase
         if(response.Data is null) return BadRequest();
         return Ok(response);
     }   
+
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [HttpPost("Skill")]
+    public async Task<ActionResult<ServiceResponse<List<Character>>>> AddCharacterSkill(AddCharacterSkillDto newCharacterSkill)
+    {
+        return Ok(await CharacterService.AddCharacterSkill(newCharacterSkill));
+    } 
     
     [HttpPut]
     [ProducesResponseType(StatusCodes.Status200OK)]
